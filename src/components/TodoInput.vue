@@ -1,6 +1,14 @@
 <template>
     <div>
-        <input v-model="message">
+        <input
+                v-model="message"
+                @keyup.enter="addTodo"
+        >
+
+        <a
+                href="#"
+                @click="addTodo"
+        >Add</a>
     </div>
 </template>
 
@@ -10,6 +18,15 @@
         data(){
             return {
                 message: ''
+            }
+        },
+        methods: {
+            addTodo () {
+                if (!this.message) return;
+
+                //  触发事件'add'
+                this.$emit('add', this.message);
+                this.message = '';
             }
         }
     }
